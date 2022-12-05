@@ -28,3 +28,11 @@ _SUCCESS
 *.swo
 *.sublime-*
 .vagrant
+*.class
+*.jpg
+*.png
+META-INF/
+*.tar.*
+*.log
+.metals/
+.vscode/

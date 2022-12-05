@@ -21,7 +21,7 @@ import MaskBandsRandGandNIR.{G_BAND, NIR_BAND, R_BAND}
 import geotrellis.proj4.{CRS, LatLng}
 
 object Serve extends App with Service {
-  val catalogPath = new java.io.File("data/catalog").toURI
+  val catalogPath = new java.io.File("/Volumes/jimDisk/geotrellis-landsat-tutorial/modis/re-catalog").toURI
   // Create a readers that will read in the indexed tiles we produced in IngestImage.
   val attributeStore: AttributeStore =
     AttributeStore(catalogPath)
@@ -87,7 +87,7 @@ trait Service {
             // Read in the tile at the given z/x/y coordinates.
             val tileOpt: Option[MultibandTile] =
               try {
-                val reader = Serve.valueReader.reader[SpatialKey, MultibandTile](LayerId("landsat", zoom))
+                val reader = Serve.valueReader.reader[SpatialKey, MultibandTile](LayerId("modis", zoom))
                 Some(reader.read(x, y))
               } catch {
                 case _: ValueNotFoundError =>
@@ -109,7 +109,7 @@ trait Service {
           post {
             entity(as[String]) { geoJson =>
               val poly = geoJson.parseGeoJson[Polygon]
-              val id: LayerId = LayerId("landsat", zoom)
+              val id: LayerId = LayerId("modis", zoom)
 
               // Leaflet produces polygon in LatLng, we need to reproject it to layer CRS
               val layerMetadata = Serve.attributeStore.readMetadata[TileLayerMetadata[SpatialKey]](id)

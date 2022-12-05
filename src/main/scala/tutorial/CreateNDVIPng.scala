@@ -6,8 +6,8 @@ import geotrellis.raster.render._
 import com.typesafe.config.ConfigFactory
 
 object CreateNDVIPng {
-  val maskedPath = "data/r-g-nir.tif"
-  val ndviPath = "data/ndvi.png"
+  val maskedPath = "data/modis/r-g-nir.tif"
+  val ndviPath = "data/modis/ndvi.png"
 
   def main(args: Array[String]): Unit = {
     val ndvi = {
